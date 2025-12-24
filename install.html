@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <title>Установка прокси</title>
+  <style>
+    body { font-family: sans-serif; padding: 20px; text-align: center; }
+    input { margin: 10px; padding: 8px; width: 200px; }
+    button { padding: 10px 20px; background: #4a6cf7; color: white; border: none; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <h2>🔧 Установка SOCKS5-прокси</h2>
+  <p>Введите ваши данные:</p>
+
+  <input id="login" placeholder="Логин" />
+  <input id="password" placeholder="Пароль" type="password" />
+  <input id="ip" placeholder="IP адрес" value="45.145.57.225" />
+  <input id="port" placeholder="Порт" value="13272" />
+
+  <button onclick="install()">Установить в v2Box</button>
+
+  <script>
+    function install() {
+      const login = document.getElementById('login').value;
+      const password = document.getElementById('password').value;
+      const ip = document.getElementById('ip').value;
+      const port = document.getElementById('port').value;
+
+      if (!login || !password || !ip || !port) {
+        alert("Заполните все поля!");
+        return;
+      }
+
+      const encodedLogin = encodeURIComponent(login);
+      const encodedPassword = encodeURIComponent(password);
+      const socksUrl = `socks5://${encodedLogin}:${encodedPassword}@${ip}:${port}#LunaVPN`;
+
+      window.location.href = socksUrl;
+    }
+  </script>
+</body>
+</html>
